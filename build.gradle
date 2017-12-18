@@ -1,10 +1,63 @@
 apply plugin: 'java-library'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+    }
+}
 allprojects {
     repositories {
         jcenter()
     }
+
 }
+
+if (JavaVersion.current().isJava8Compatible()) {//disable linter for javadoc
+    allprojects {
+        tasks.withType(Javadoc) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
+    }
+}
+
+ext {
+
+    //For bintray and jcenter distribution
+    bintrayRepo = 'v3-components-model'
+    bintrayName = 'v3-components-model'
+
+    publishedGroupId = 'agency.v3.components.model'
+    libraryName = 'v3-components-model'
+    artifact = 'v3-components-model' //This artifact name should be the same with library module name
+
+    libraryDescription = 'Base classes and utilities to implement Android app model layer, in a testable MVP fashion'
+
+    siteUrl = 'https://github.com/ousenko/v3-components-model'
+    gitUrl = 'git@github.com:ousenko/v3-components-model.git'
+
+    libraryVersion = '0.1.0'
+
+    developerId = 'ousenko'
+    developerName = 'Drew'
+    developerEmail = '5771855+ousenko@users.noreply.github.com'
+//    organization = '' // if you push to organization's repository.
+    licenseName = 'MIT License'  //Example for license
+    licenseUrl = 'https://github.com/ousenko/v3-components-model/blob/master/LICENSE'
+    allLicenses = ["MIT"]
+
+}
+//These two remote files contain Bintray configuration as described above.
+//apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/install.gradle'
+//apply from: 'https://raw.githubusercontent.com/quangctkm9207/template-files/master/android/gradle/bintray.gradle'
+
+//Add these lines to publish library to bintray. This is the readymade scripts made by github user nuuneoi to make uploading to bintray easy.
+//Place it at the end of the file
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 
 dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.1.7'

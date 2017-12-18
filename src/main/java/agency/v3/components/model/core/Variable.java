@@ -71,7 +71,7 @@ public class Variable<T> {
     }
 
     /**
-     * Connect observer to that variable. Observer will be notified of only distinct value changes (e.g. was value A, became value B; value A -> value A does not notify observers)
+     * Connect observer to that variable. Observer will be notified of only distinct value changes
      * @throws IllegalStateException if you try to resubscribe already subscribed observer, or if this {@link Variable} is already subscribed to by some observer
      */
     public Disposable observe(Consumer1<T> observer) {
