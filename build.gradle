@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+dependencies {
+    api 'io.reactivex.rxjava2:rxjava:2.1.7'
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
