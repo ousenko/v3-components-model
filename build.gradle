@@ -39,7 +39,7 @@ ext {
     siteUrl = 'https://github.com/ousenko/v3-components-model'
     gitUrl = 'git@github.com:ousenko/v3-components-model.git'
 
-    libraryVersion = '0.1.0'
+    libraryVersion = '0.1.1'
 
     developerId = 'ousenko'
     developerName = 'Drew'

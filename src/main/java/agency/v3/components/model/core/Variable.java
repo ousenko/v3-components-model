@@ -25,9 +25,21 @@ public class Variable<T> {
         this.shouldClearValueAfterConsumption = shouldClearValueAfterConsumption;
     }
 
+    /**
+     * Get value of this {@link Variable}
+     * @return value of variable or null, if no value specified
+     * */
+    @Nullable
+    public T getValue(){
+        synchronized (this) {
+            return value;
+        }
+    }
+
 
     /**
      * Set value of this {@link Variable} and notify registered consumers
+     * @param value a new value for this variable
      * */
     public void setValue(T value) {
         synchronized (this) {
@@ -72,6 +84,7 @@ public class Variable<T> {
 
     /**
      * Connect observer to that variable. Observer will be notified of only distinct value changes
+     * @return Disposable that can be disposed thus ending the subscription of observer to this {@link Variable}
      * @throws IllegalStateException if you try to resubscribe already subscribed observer, or if this {@link Variable} is already subscribed to by some observer
      */
     public Disposable observe(Consumer1<T> observer) {
